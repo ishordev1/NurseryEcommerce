@@ -18,8 +18,8 @@ public interface ProductService {
     List<ProductDto> getAllProducts();
     List<ProductDto> getAllProductsByCategoryId(String categoryId);
 
-    ProductDto addCategoryToProduct(String productId, String categoryId);
+    ProductDto addCategoryToProduct(String productId, List<String> categoryId);
 
-    ProductDto removeCategoryFromProduct(String productId, String categoryId);
+    ProductDto removeCategoryFromProduct(String productId, List<String> categoriesId);
     
 }

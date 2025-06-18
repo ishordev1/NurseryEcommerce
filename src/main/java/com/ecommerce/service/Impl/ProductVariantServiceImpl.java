@@ -49,4 +49,10 @@ public class ProductVariantServiceImpl implements ProductVariantService {
                 .orElseThrow(() -> new ResourceNotFoundException("Variant ID " + variantId));
         variantRepository.delete(variant);
     }
+    @Override
+    public ProductVariantDto getVariantById(String variantId) {
+        ProductVariant variant = variantRepository.findById(variantId)
+                .orElseThrow(() -> new ResourceNotFoundException("Variant ID " + variantId));
+    	return this.modelMapper.map(variant, ProductVariantDto.class);
+    }
 }

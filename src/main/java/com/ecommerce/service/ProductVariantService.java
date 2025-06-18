@@ -8,4 +8,5 @@ public interface ProductVariantService {
     ProductVariantDto createVariant(String productId,ProductVariantDto dto);
     List<ProductVariantDto> getVariantsByProductId(String productId);
     void deleteVariant(String variantId);
+    public ProductVariantDto getVariantById(String variantId);
 }

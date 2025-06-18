@@ -42,7 +42,9 @@ public class CategoryServiceImpl implements CategoryService{
 	    public void deleteCategory(String categoryId) {
 	        Category category = categoryRepository.findById(categoryId)
 	                .orElseThrow(() -> new ResourceNotFoundException("Category ID"+ categoryId));
-
+if(category.getProduct()!=null) {
+	throw new ResourceNotFoundException("category not delete, it have product..");
+}
 	        categoryRepository.delete(category);
 	    }
 

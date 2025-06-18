@@ -29,10 +29,12 @@ public class ProductVariantController {
     }
 
     @GetMapping("/product/{productId}")
-    public ResponseEntity<List<ProductVariantDto>> getVariants(@PathVariable String productId) {
+    public ResponseEntity<List<ProductVariantDto>> getAllVariants(@PathVariable String productId) {
         return ResponseEntity.ok(productVariantService.getVariantsByProductId(productId));
     }
 
+   
+    
     @DeleteMapping("/{variantId}")
     public ResponseEntity<Void> deleteVariant(@PathVariable String variantId) {
         productVariantService.deleteVariant(variantId);

@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.ecommerce.entity.Product;
 
 public interface ProductRepository extends JpaRepository<Product, String> {
-	List<Product> findByCategory_Id(String categoryId);
+	List<Product> findBycategories_Id(String categoryId);
 }

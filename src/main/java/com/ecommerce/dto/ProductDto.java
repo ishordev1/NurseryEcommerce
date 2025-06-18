@@ -8,6 +8,7 @@ import com.ecommerce.entity.ProductVariant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
@@ -17,6 +18,6 @@ public class ProductDto {
 	private String name;
     private String description;
     private String imageUrl;
-    private List<String> categoryIds;
+    private List<CategoryDto> categories;
     private List<ProductVariantDto> productVariant;
 }
