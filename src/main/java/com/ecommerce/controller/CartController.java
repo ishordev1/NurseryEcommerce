@@ -20,19 +20,19 @@ public class CartController {
             @PathVariable String userId,
             @PathVariable String variantId,
             @PathVariable int quantity) {
-    	System.out.println("useId:"+userId+" var:"+variantId+" quentity:"+quantity);
+//    	System.out.println("useId:"+userId+" var:"+variantId+" quentity:"+quantity);
 
         CartDto cartDto = cartService.addItemToCart(userId, variantId, quantity);
         return ResponseEntity.ok(cartDto);
     }
 
     // Remove item from cart
-    @DeleteMapping("/remove")
+    @DeleteMapping("/remove/{userId}/{cartItemId}")
     public ResponseEntity<CartDto> removeItemFromCart(
-            @RequestParam String userId,
-            @RequestParam String variantId) {
+            @PathVariable String userId,
+            @PathVariable String cartItemId) {
 
-        CartDto cartDto = cartService.removeItemFromCart(userId, variantId);
+        CartDto cartDto = cartService.removeItemFromCart(userId, cartItemId);
         return ResponseEntity.ok(cartDto);
     }
 

@@ -78,12 +78,14 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDto removeItemFromCart(String userId, String variantId) {
+    public CartDto removeItemFromCart(String userId, String cartItemId) {
         Cart cart = cartRepository.findByUser_Id(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cart not found for user: " + userId));
+CartItem cartItem=this.cartItemRepository.findById(cartItemId).orElseThrow(()-> new ResourceNotFoundException("cartItem not found on this id:"+cartItemId));
+       
 
-        cart.getItems().removeIf(item -> item.getProductVariant().getId().equals(variantId));
-
+cart.getItems().removeIf(item -> item.getId().equals(cartItemId));
+cartItemRepository.deleteById(cartItemId);
         cart.setTotalPrice(cart.getItems().stream()
                 .mapToDouble(CartItem::getTotalItemPrice).sum());
 
@@ -92,6 +94,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public CartDto getCartByUserId(String userId) {
+    	User us=this.userRepository.findById(userId).orElseThrow(()-> new ResourceNotFoundException("user not found on id:"+userId));
         Cart cart = cartRepository.findByUser_Id(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cart not found for user: " + userId));
 

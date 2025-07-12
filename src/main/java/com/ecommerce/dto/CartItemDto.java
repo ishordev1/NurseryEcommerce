@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CartItemDto {
     private String id;
-    private Cart cart;
-    private ProductVariant productVariant;
+    private ProductVariantDto productVariant;
     private int quantity;
     private double totalItemPrice;
 }

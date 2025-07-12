@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CartDto {
     private String id;
-    private UserDto user;
     private List<CartItemDto> items;
     private double totalPrice;
 }
