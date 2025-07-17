@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
 			
 			order.setStatus(OrderStatus.PLACED);
 		}
-		else {
+	else {
 			order.setStatus(OrderStatus.PENDING);
 		}
 		
@@ -127,15 +127,14 @@ public class OrderServiceImpl implements OrderService {
 
 		Orders order = this.modelMapper.map(orders, Orders.class);
 		order.setUser(user);
-		if(order.getPayment().getPaymentMode()==PaymentMode.COD) {
-			
-			order.setStatus(OrderStatus.PLACED);
-		}
-		else {
 			order.setStatus(OrderStatus.PENDING);
-		}
+			if(order.getPayment().getPaymentMode()==PaymentMode.COD) {
+				
+				order.setStatus(OrderStatus.PLACED);
+			}
+		
 		order.setTotalAmount(variant.getPrice() * quantity);
-
+		
 		OrderItem item = new OrderItem();
 		item.setOrders(order);
 		item.setProductVariant(variant);
@@ -158,6 +157,20 @@ public class OrderServiceImpl implements OrderService {
 
 		Orders savedOrder = orderRepository.save(order);
 		return modelMapper.map(savedOrder, OrdersDto.class);
+	}
+	
+	@Override
+	public OrdersDto updateOrderAddress(String orderId,OrdersDto ordersDto) {
+	Orders orders=	this.orderRepository.findById(orderId).orElseThrow(()-> new ResourceNotFoundException("order not found:"+orderId));
+		orders.setShippingAddress(ordersDto.getShippingAddress());
+		Orders saveOrders = this.orderRepository.save(orders);
+	return this.modelMapper.map(saveOrders, OrdersDto.class);
+	
+	}
+	@Override
+	public void deleteOrder(String orderId) {
+		Orders order = this.orderRepository.findById(orderId).orElseThrow(()-> new ResourceNotFoundException("order not found:"+orderId));
+		this.orderRepository.delete(order);
 	}
 
 }

@@ -13,5 +13,6 @@ public interface OrderService {
 
     void cancelOrder(String orderId);
     OrdersDto placeDirectOrder(String userId, String variantId, int quantity,OrdersDto orders);
-
+    OrdersDto updateOrderAddress(String orderId,OrdersDto ordersDto);
+    void deleteOrder(String orderId);
 }

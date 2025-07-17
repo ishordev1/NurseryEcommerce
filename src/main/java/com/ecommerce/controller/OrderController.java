@@ -4,6 +4,8 @@ import com.ecommerce.dto.OrdersDto;
 import com.ecommerce.service.OrderService;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,4 +57,20 @@ public class OrderController {
         orderService.cancelOrder(orderId);
         return ResponseEntity.ok("Order cancelled successfully.");
     }
+    @PutMapping("/update")
+    public ResponseEntity<OrdersDto> updateOrder(
+    		@RequestParam String orderId,
+    		@RequestBody OrdersDto orderDto
+    		){
+    	OrdersDto updateOrder = this.orderService.updateOrderAddress(orderId, orderDto);
+    	return new ResponseEntity<>(updateOrder,HttpStatus.OK);
+    }
+    
+    @DeleteMapping
+    public ResponseEntity<String> deleteOrder(@RequestParam String orderId){
+    	this.orderService.deleteOrder(orderId);
+    	return ResponseEntity.ok("order delete successfully");
+    }
+    
 }
+
