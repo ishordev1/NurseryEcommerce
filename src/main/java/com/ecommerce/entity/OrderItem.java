@@ -20,7 +20,7 @@ public class OrderItem {
     private String id;
 
     @ManyToOne
-    private Order order;
+    private Orders orders;
 
     @ManyToOne
     private ProductVariant productVariant;
